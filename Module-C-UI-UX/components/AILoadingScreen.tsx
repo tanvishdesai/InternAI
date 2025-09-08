@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Confetti from 'react-confetti';
 import { useTranslation } from '../utils/i18n';
@@ -19,7 +19,7 @@ export const AILoadingScreen: React.FC<AILoadingScreenProps> = ({
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
   const { t } = useTranslation(language);
 
-  const steps = [
+  const steps = useMemo(() => [
     {
       text: t('analyzingProfile'),
       duration: 1500,
@@ -40,7 +40,7 @@ export const AILoadingScreen: React.FC<AILoadingScreenProps> = ({
       duration: 800,
       icon: '✨'
     }
-  ];
+  ], [t]);
 
   useEffect(() => {
     // Set window size for confetti
@@ -281,46 +281,17 @@ interface SmartAILoadingScreenProps extends AILoadingScreenProps {
 }
 
 export const SmartAILoadingScreen: React.FC<SmartAILoadingScreenProps> = ({
-  customSteps,
-  showProgress = true,
-  theme = 'default',
+  customSteps: _customSteps,
+  showProgress: _showProgress = true,
+  theme: _theme = 'default',
   ...props
 }) => {
-  const stepsToUse = customSteps || [
-    {
-      text: props.language === 'hi' ? 'आपकी प्रोफ़ाइल का विश्लेषण कर रहे हैं...' : 'Analyzing your profile...',
-      duration: 1500,
-      icon: '🧠'
-    },
-    {
-      text: props.language === 'hi' ? '10,000+ अवसर स्कैन कर रहे हैं...' : 'Scanning 10,000+ opportunities...',
-      duration: 2000,
-      icon: '🔍'
-    },
-    {
-      text: props.language === 'hi' ? 'सही मिलान ढूंढ रहे हैं...' : 'Finding perfect matches...',
-      duration: 1500,
-      icon: '🎯'
-    },
-    {
-      text: props.language === 'hi' ? 'तैयार! आपके रिजल्ट यहाँ हैं ✨' : 'Ready! Here are your matches ✨',
-      duration: 800,
-      icon: '✨'
-    }
-  ];
-
-  const themeClasses = {
-    default: 'bg-gradient-to-br from-primary-50 via-white to-secondary-50',
-    dark: 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900',
-    minimal: 'bg-white'
-  };
+  // Note: customSteps, showProgress, and theme are accepted for API compatibility
+  // but currently not used in the base AILoadingScreen implementation
 
   return (
     <AILoadingScreen
       {...props}
-      steps={stepsToUse}
-      showProgress={showProgress}
-      className={themeClasses[theme]}
     />
   );
 };

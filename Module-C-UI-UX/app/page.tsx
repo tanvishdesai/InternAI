@@ -378,9 +378,6 @@ export default function Home() {
     setError('');
   };
 
-  const handleLanguageChange = (newLanguage: string) => {
-    setLanguage(newLanguage);
-  };
 
   return (
     <AccessibilityProvider>
@@ -398,7 +395,6 @@ export default function Home() {
             >
               <WelcomeScreen
                 onStartJourney={handleStartJourney}
-                onLanguageChange={handleLanguageChange}
                 initialLanguage={language}
               />
             </motion.div>

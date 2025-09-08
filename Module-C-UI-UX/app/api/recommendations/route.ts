@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
       preferred_locations: user.preferredLocations ? (Array.isArray(JSON.parse(user.preferredLocations)) ? JSON.parse(user.preferredLocations) : []) : undefined,
       remote_ok: user.remoteOk || false,
       availability_start: user.availabilityStart?.toISOString().split('T')[0],
-      duration_weeks_pref: user.durationWeeksPref ? parseInt(user.durationWeeksPref) : undefined,
+      duration_weeks_pref: user.durationWeeksPref ? (typeof user.durationWeeksPref === 'string' ? parseInt(user.durationWeeksPref) : user.durationWeeksPref) : undefined,
       stipend_pref: user.stipendPref || undefined,
       career_goal: user.careerGoal || undefined
     };

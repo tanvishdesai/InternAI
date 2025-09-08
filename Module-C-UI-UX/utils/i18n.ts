@@ -222,7 +222,15 @@ export const translations = {
     highContrast: "உயர் காண்ட்ராஸ்ட்",
     normalVision: "சாதாரண பார்வை",
     largeText: "பெரிய உரை",
-    normalText: "சாதாரண உரை"
+    normalText: "சாதாரண உரை",
+
+    // New UI Elements
+    noMoreRecommendations: "மேலும் பரிந்துரைகள் இல்லை",
+    checkBackLater: "மேலும் வாய்ப்புகளுக்கு பின்னர் சரிபார்க்கவும்",
+    perfectMatchesFound: "சரியான பொருத்தங்கள் கிடைத்தன!",
+    swipeThroughRecommendations: "இந்த தனிப்பயன் பரிந்துரைகளை ஸ்வைப் செய்யவும்",
+    newSearch: "புதிய தேடல்",
+    swipeLeftToContinue: "தொடர இடதுபுறம் ஸ்வைப் செய்யவும்"
   },
 
   bn: {
@@ -292,7 +300,15 @@ export const translations = {
     highContrast: "উচ্চ কনট্রাস্ট",
     normalVision: "স্বাভাবিক দৃষ্টি",
     largeText: "বড় টেক্সট",
-    normalText: "স্বাভাবিক টেক্সট"
+    normalText: "স্বাভাবিক টেক্সট",
+
+    // New UI Elements
+    noMoreRecommendations: "আর কোনো সুপারিশ নেই",
+    checkBackLater: "আরও সুযোগের জন্য পরে দেখুন",
+    perfectMatchesFound: "পারফেক্ট ম্যাচ পাওয়া গেছে!",
+    swipeThroughRecommendations: "এই ব্যক্তিগতকৃত সুপারিশগুলি সোয়াইপ করুন",
+    newSearch: "নতুন অনুসন্ধান",
+    swipeLeftToContinue: "চালিয়ে যেতে বামদিকে সোয়াইপ করুন"
   },
 
   te: {
@@ -362,7 +378,15 @@ export const translations = {
     highContrast: "హై కాంట్రాస్ట్",
     normalVision: "సాధారణ విజన్",
     largeText: "లార్జ్ టెక్స్ట్",
-    normalText: "నార్మల్ టెక్స్ట్"
+    normalText: "నార్మల్ టెక్స్ట్",
+
+    // New UI Elements
+    noMoreRecommendations: "మరిన్ని సిఫార్సులు లేవు",
+    checkBackLater: "మరిన్ని అవకాశాల కోసం తర్వాత తనిఖీ చేయండి",
+    perfectMatchesFound: "పర్ఫెక్ట్ మ్యాచ్‌లు కనుగొనబడ్డాయి!",
+    swipeThroughRecommendations: "ఈ వ్యక్తిగత సిఫార్సుల ద్వారా స్వైప్ చేయండి",
+    newSearch: "కొత్త శోధన",
+    swipeLeftToContinue: "కొనసాగించడానికి ఎడమ వైపు స్వైప్ చేయండి"
   }
 };
 

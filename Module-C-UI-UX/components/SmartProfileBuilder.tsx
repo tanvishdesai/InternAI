@@ -447,7 +447,6 @@ export const SmartProfileBuilder: React.FC<SmartProfileBuilderProps> = ({
                           }));
                           setInputValue(skills.join(', '));
                         }}
-                        language={language}
                       />
                     </div>
                   ) : currentProfileSection.type === 'textarea' ? (
@@ -594,10 +593,7 @@ export const SkillSelector: React.FC<{
   items: string[];
   selected: string[];
   onChange: (values: string[]) => void;
-  language?: string;
-}> = ({ items, selected, onChange, language = 'en' }) => {
-  const { t } = useTranslation(language);
-
+}> = ({ items, selected, onChange }) => {
   const toggle = (value: string) => {
     if (selected.includes(value)) {
       onChange(selected.filter(s => s !== value));

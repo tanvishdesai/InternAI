@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useTranslation } from '../utils/i18n';
@@ -33,13 +33,11 @@ const UsersIcon = () => (
 
 interface WelcomeScreenProps {
   onStartJourney?: () => void;
-  onLanguageChange?: (language: string) => void;
   initialLanguage?: string;
 }
 
 export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
   onStartJourney,
-  onLanguageChange,
   initialLanguage = 'en'
 }) => {
   const [selectedLanguage, setSelectedLanguage] = useState(initialLanguage);
@@ -47,13 +45,13 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
   const { t } = useTranslation(selectedLanguage);
   const { reducedMotion } = useAccessibility();
 
-  const languages = [
+  const languages = useMemo(() => [
     { code: 'en', name: 'English', flag: '🇺🇸' },
     { code: 'hi', name: 'हिंदी', flag: '🇮🇳' },
     { code: 'ta', name: 'தமிழ்', flag: '🇮🇳' },
     { code: 'bn', name: 'বাংলা', flag: '🇮🇳' },
     { code: 'te', name: 'తెలుగు', flag: '🇮🇳' }
-  ];
+  ], []);
 
   const features = [
     {
@@ -222,7 +220,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
 };
 
 // Features Grid Component
-const FeaturesGrid: React.FC<{ features: Array<{ icon: React.ReactNode; title: string; description: string }>, reducedMotion: boolean }> = ({ features, reducedMotion }) => {
+const FeaturesGrid: React.FC<{ features: Array<{ icon: React.ComponentType; title: string; description: string; color: string }>, reducedMotion: boolean }> = ({ features, reducedMotion }) => {
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1
