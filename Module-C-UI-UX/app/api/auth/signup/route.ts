@@ -18,6 +18,9 @@ export async function POST(request: NextRequest) {
     // Check if user already exists
     const existingUser = await prisma.userProfile.findUnique({
       where: { email }
+    }).catch((error) => {
+      console.error('Database query error:', error);
+      throw new Error('Database connection failed');
     });
 
     if (existingUser) {
@@ -41,6 +44,9 @@ export async function POST(request: NextRequest) {
         preferredSectors: JSON.stringify([]),
         preferredLocations: JSON.stringify([]),
       }
+    }).catch((error) => {
+      console.error('Database create error:', error);
+      throw new Error('Failed to create user account');
     });
 
     // Create session or return user data (simplified for now)

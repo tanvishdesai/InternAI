@@ -17,6 +17,9 @@ export async function POST(request: NextRequest) {
     // Find user by email
     const user = await prisma.userProfile.findUnique({
       where: { email }
+    }).catch((error) => {
+      console.error('Database query error:', error);
+      throw new Error('Database connection failed');
     });
 
     if (!user || !user.password) {
@@ -40,6 +43,9 @@ export async function POST(request: NextRequest) {
     const updatedUser = await prisma.userProfile.update({
       where: { email },
       data: { isAuthenticated: true }
+    }).catch((error) => {
+      console.error('Database update error:', error);
+      throw new Error('Failed to update authentication status');
     });
 
     // Parse JSON fields for response

@@ -1,202 +1,108 @@
-# Internship Recommendation System - UI
+# Internship Platform - UI/UX Module
 
-A modern Next.js application for internship recommendations powered by AI/ML.
+A modern Next.js application for internship recommendations with voice-powered profile building.
 
-## Features
-
-- 🧠 AI-powered internship matching
-- 📝 User profile creation with validation
-- 🎯 Personalized recommendations
-- 💾 SQLite database integration
-- 🔄 Real-time recommendation updates
-- 📱 Responsive design with Tailwind CSS
-
-## Tech Stack
-
-- **Frontend**: Next.js 15, React 19, TypeScript
-- **Styling**: Tailwind CSS
-- **Forms**: React Hook Form with Zod validation
-- **Database**: Prisma with SQLite
-- **Icons**: Lucide React
-- **ML Integration**: REST API calls to Python ML service
-
-## Getting Started
+## 🚀 Deployment to Vercel
 
 ### Prerequisites
 
-- Node.js 18+
-- npm or yarn
-- Python 3.8+ (for ML service)
+1. **Database Setup**: You need a PostgreSQL database. Choose one of these options:
+   - **Vercel Postgres** (Recommended for Vercel deployment)
+   - **Supabase** (Free tier available)
+   - **PlanetScale** (MySQL)
+   - **Neon** (Serverless PostgreSQL)
 
-### Quick Start (Recommended)
+### Step 1: Set up Database
 
-#### Option 1: Windows Batch File
-```bash
-# From the project root directory
-./start-all.bat
+#### Option A: Vercel Postgres (Recommended)
+
+1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
+2. Navigate to your project → Storage → Create Database → Postgres
+3. Copy the `DATABASE_URL` from the connection details
+
+#### Option B: Supabase
+
+1. Go to [Supabase](https://supabase.com)
+2. Create a new project
+3. Go to Settings → Database → Connection string
+4. Copy the connection string (URI)
+
+### Step 2: Environment Variables
+
+In your Vercel project settings, add these environment variables:
+
+```env
+DATABASE_URL=your_postgresql_connection_string_here
+NEXTAUTH_SECRET=your_random_secret_key_here
+NEXTAUTH_URL=https://your-app-name.vercel.app
 ```
 
-#### Option 2: npm Script (Cross-platform)
-```bash
-cd Module-C-UI-UX/my-app
-npm run start-all
-```
+### Step 3: Database Migration
 
-#### Option 3: Manual Setup
-
-1. **Install dependencies and setup database:**
-   ```bash
-   cd Module-C-UI-UX/my-app
-   npm run setup
-   ```
-
-2. **Configure environment variables:**
-
-   Create a `.env.local` file in the my-app directory:
-
-   ```env
-   # ML API Configuration
-   ML_API_URL=http://localhost:8000
-
-   # Optional: If using PostgreSQL instead of SQLite
-   # DATABASE_URL="postgresql://username:password@localhost:5432/internship_db?schema=public"
-   ```
-
-3. **Start all services:**
-
-   **Terminal 1 - ML Service:**
-   ```bash
-   cd Module-B ML
-   python app.py
-   ```
-
-   **Terminal 2 - Frontend:**
-   ```bash
-   cd Module-C-UI-UX/my-app
-   npm run dev
-   ```
-
-   Open [http://localhost:3000](http://localhost:3000) to view the application.
-
-## Project Structure
-
-```
-my-app/
-├── app/
-│   ├── api/
-│   │   ├── users/           # User profile CRUD API
-│   │   └── recommendations/ # ML recommendation API
-│   ├── globals.css          # Global styles
-│   ├── layout.tsx           # Root layout
-│   └── page.tsx             # Main application page
-├── components/
-│   ├── ui/                  # Reusable UI components
-│   ├── UserProfileForm.tsx  # User information form
-│   └── RecommendationsDisplay.tsx # Recommendations display
-├── lib/
-│   ├── prisma.ts            # Database client
-│   └── utils.ts             # Utility functions
-├── prisma/
-│   └── schema.prisma        # Database schema
-└── public/                  # Static assets
-```
-
-## API Endpoints
-
-### User Management
-- `POST /api/users` - Create/update user profile
-- `GET /api/users?email=user@example.com` - Get user profile
-
-### Recommendations
-- `POST /api/recommendations` - Get personalized recommendations
-
-## Database Schema
-
-The application uses SQLite with the following user profile structure:
-
-- `id` - Unique identifier
-- `email` - User email (unique)
-- `name` - Full name
-- `educationLevel` - Education level (12th, diploma, ug, pg)
-- `majorField` - Field of study
-- `skills` - JSON array of skills
-- `preferredSectors` - JSON array of preferred sectors
-- `preferredLocations` - JSON array of preferred locations
-- `remoteOk` - Boolean for remote work preference
-- `stipendPref` - Preferred stipend range
-- `availabilityStart` - Available start date
-- `durationWeeksPref` - Preferred duration
-- `careerGoal` - Career aspirations text
-
-## Usage
-
-1. **Create Profile**: Fill out the user information form with your education, skills, and preferences
-2. **Get Recommendations**: The system automatically saves your profile and fetches AI-powered recommendations
-3. **View Results**: Browse through personalized internship matches with detailed information
-4. **Apply**: Click on "Apply Now" links to apply directly to internships
-
-## Development
-
-### Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-
-### Database Management
+After setting up the database:
 
 ```bash
-# View database
-npx prisma studio
-
-# Reset database
-npx prisma migrate reset
-
-# Generate client after schema changes
+# Generate Prisma client
 npx prisma generate
+
+# Push schema to database
+npx prisma db push
+
+# (Optional) Create migration
+npx prisma migrate dev --name init
 ```
 
-## Deployment
+### Step 4: Deploy to Vercel
 
-1. **Build the application:**
-   ```bash
-   npm run build
-   ```
+1. Push your code to GitHub/GitLab
+2. Connect your repository to Vercel
+3. Vercel will automatically:
+   - Install dependencies
+   - Generate Prisma client
+   - Run database migrations
+   - Build and deploy your app
 
-2. **Start production server:**
-   ```bash
-   npm run start
-   ```
+### Troubleshooting
 
-3. **Environment variables for production:**
-   - Set `ML_API_URL` to your deployed ML service URL
-   - Configure database URL if using PostgreSQL
+**Build Error: "Failed to collect page data"**
+- Check your `DATABASE_URL` is correct
+- Ensure database is accessible from Vercel
+- Verify Prisma schema matches your database
 
-## Troubleshooting
+**Database Connection Issues**
+- Use SSL connection string for production
+- Check firewall settings allow Vercel's IP ranges
+- Ensure database credentials are correct
 
-### Common Issues
+**Prisma Client Issues**
+- Make sure `postinstall` script runs: `prisma generate`
+- Check Prisma version compatibility
 
-1. **ML API Connection Error**
-   - Ensure the ML service is running on the correct port
-   - Check `ML_API_URL` in environment variables
+## 🛠 Development
 
-2. **Database Connection Issues**
-   - Run `npx prisma generate` after schema changes
-   - Check database file permissions
+```bash
+# Install dependencies
+npm install
 
-3. **Build Errors**
-   - Clear Next.js cache: `rm -rf .next`
-   - Reinstall dependencies: `rm -rf node_modules && npm install`
+# Generate Prisma client
+npx prisma generate
 
-## Contributing
+# Push database schema
+npx prisma db push
 
-1. Follow the existing code structure
-2. Use TypeScript for type safety
-3. Add proper error handling
-4. Test API endpoints thoroughly
-5. Update documentation for new features
+# Start development server
+npm run dev
+```
 
-## License
+## 📁 Project Structure
 
-This project is part of the SIH 2025 submission.
+```
+├── app/                 # Next.js app directory
+│   ├── api/            # API routes
+│   ├── login/          # Login page
+│   └── signup/         # Signup page
+├── components/         # React components
+├── lib/               # Utility libraries
+├── prisma/            # Database schema and migrations
+└── utils/             # Helper functions
+```
