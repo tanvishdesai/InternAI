@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model UserProfile {
+  id                    String   @id @default(cuid())
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  // Authentication
+  password             String?
+  isAuthenticated      Boolean  @default(false)
+
+  // Personal Information
+  name                 String?
+  email                String   @unique
+
+  // Education & Qualification
+  educationLevel       String?   // "12th", "diploma", "ug", "pg"
+  majorField           String?
+
+  // Skills & Interests (stored as JSON)
+  skills               String   // JSON array of skills
+  preferredSectors     String   // JSON array of sectors
+  careerGoal           String?
+
+  // Location Preferences
+  preferredLocations   String   // JSON array of locations
+  remoteOk             Boolean  @default(false)
+
+  // Availability & Duration
+  availabilityStart    DateTime?
+  durationWeeksPref    Int?
+
+  // Compensation Preferences
+  stipendPref          String?  // Range like "10000-20000" or single value
+
+  // Experience (additional field for ML engine)
+  yearsOfExperience    Int?     @default(0)
+
+  @@map("user_profiles")
+}

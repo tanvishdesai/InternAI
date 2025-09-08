@@ -1,0 +1,53 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "start-all": "concurrently \"npm run start:ml\" \"npm run dev\" --names \"ML,Frontend\" --prefix name",
+    "start-all:windows": "start /B cmd /c \"cd ../Module-B\\ ML && python app.py\" && npm run dev",
+    "start:ml": "cd ../Module-B\\ ML && python app.py",
+    "setup": "npm install && npx prisma generate && npx prisma db push",
+    "db:studio": "npx prisma studio"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.1",
+    "@prisma/client": "^6.15.0",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.10",
+    "@types/bcryptjs": "^2.4.6",
+    "@use-gesture/react": "^10.3.1",
+    "autoprefixer": "^10.4.21",
+    "bcryptjs": "^3.0.2",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.23.12",
+    "lucide-react": "^0.542.0",
+    "next": "15.5.2",
+    "next-pwa": "^5.6.0",
+    "prisma": "^6.15.0",
+    "react": "19.1.0",
+    "react-confetti": "^6.4.0",
+    "react-dom": "19.1.0",
+    "react-hook-form": "^7.62.0",
+    "react-intersection-observer": "^9.16.0",
+    "react-spring": "^10.0.1",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^3.4.17",
+    "web-vitals": "^5.1.0",
+    "zod": "^4.1.5",
+    "zustand": "^5.0.8"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "concurrently": "^9.2.1",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.2",
+    "typescript": "^5"
+  }
+}

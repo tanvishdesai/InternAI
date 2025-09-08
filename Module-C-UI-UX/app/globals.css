@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  /* Design System Variables */
+  --primary-50: #fff7ed;
+  --primary-500: #f97316;
+  --primary-600: #ea580c;
+  --secondary-50: #eff6ff;
+  --secondary-500: #3b82f6;
+  --secondary-600: #2563eb;
+  --success-500: #10b981;
+  --success-600: #059669;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* Custom Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(249, 115, 22, 0.6);
+  }
+}
+
+/* Utility Classes */
+.gradient-animated {
+  background: linear-gradient(-45deg, #ff6b35, #f97316, #3b82f6, #1d4ed8);
+  background-size: 400% 400%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+.gradient-primary {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+}
+
+.gradient-secondary {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+.btn-touch {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+}
+
+.swipe-area {
+  touch-action: pan-y;
+}
+
+/* Allow horizontal swipes on draggable cards */
+.touch-pan-x {
+  touch-action: pan-x;
+}
+
+/* Accessibility */
+.high-contrast {
+  --background: #000000;
+  --foreground: #ffffff;
+  --text-primary: #ffffff;
+  --text-secondary: #ffffff;
+  --text-muted: #cccccc;
+}
+
+.reduce-motion * {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+
+/* Mobile-First Container */
+.container {
+  @apply px-4 mx-auto;
+  @apply sm:px-6;
+  @apply md:px-8;
+  @apply lg:max-w-6xl;
+}
+
+/* Loading States */
+.loading-skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Focus States */
+.focus-ring {
+  @apply focus:outline-none focus:ring-4 focus:ring-primary-500/20;
+}
+
+/* Glass Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* High contrast text overrides */
+.high-contrast .text-slate-900,
+.high-contrast .text-gray-900,
+.high-contrast .text-slate-700,
+.high-contrast .text-gray-700,
+.high-contrast .text-slate-600,
+.high-contrast .text-gray-600 {
+  color: var(--text-primary) !important;
+}
+
+.high-contrast .text-slate-500,
+.high-contrast .text-gray-500,
+.high-contrast .text-slate-400,
+.high-contrast .text-gray-400 {
+  color: var(--text-muted) !important;
+}
+
+/* Voice Interface Styles */
+.voice-active {
+  animation: pulse-glow 2s infinite;
+}
+
+.voice-button {
+  transition: all 0.3s ease;
+}
+
+.voice-button:hover {
+  transform: scale(1.05);
+}
+
+.voice-button.active {
+  background: linear-gradient(135deg, #10b981, #059669);
+  animation: pulse-glow 1.5s infinite;
+}
