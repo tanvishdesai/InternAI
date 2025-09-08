@@ -1,0 +1,148 @@
+# Configuration for Internship Recommendation Engine
+
+# Embedding and Retrieval Settings
+embedding_model: 'all-MiniLM-L6-v2'
+top_k_retrieval: 100  # Increased for better diversity
+top_k_final: 50       # Final candidates after filtering
+
+# Enhanced Scoring Weights (Hybrid System)
+scoring_weights:
+  embedding_similarity: 0.25     # Reduced weight for embedding similarity
+  skill_overlap: 0.25           # Increased for skill domain alignment
+  qualification_fit: 0.20       # Increased for strict qualification filtering
+  experience_compatibility: 0.15 # New: experience level matching
+  location_match: 0.08          # Adjusted for location compatibility
+  sector_relevance: 0.05        # Weight for sector relevance
+  stipend_match: 0.02           # Weight for stipend compatibility
+  recency: 0.01                 # Weight for recency (newer postings)
+  diversity_bonus: 0.05         # New: diversity and fairness bonus
+
+# Qualification Filtering (Strict)
+qualification_filtering:
+  strict_mode: true              # Enable strict qualification filtering
+  allow_higher_qual: false       # Don't allow overqualified candidates for lower positions
+  allow_lower_qual: false        # Don't recommend higher positions to underqualified
+  exact_match_bonus: 1.5         # Bonus for exact qualification matches
+  experience_override: true      # Allow experience to compensate for qualifications
+
+# Skill Taxonomy and Domain Alignment
+skill_taxonomy:
+  domains:
+    programming: ['python', 'javascript', 'java', 'c++', 'c#', 'ruby', 'php', 'go', 'rust', 'kotlin', 'swift', 'r', 'matlab']
+    web_development: ['html', 'css', 'react', 'angular', 'vue', 'node.js', 'django', 'flask', 'spring', 'express', 'laravel']
+    data_science: ['machine_learning', 'data_analysis', 'pandas', 'numpy', 'tensorflow', 'pytorch', 'scikit-learn', 'sql', 'mongodb', 'hadoop', 'spark']
+    design: ['photoshop', 'figma', 'illustrator', 'sketch', 'xd', 'canva', 'premiere', 'after_effects', 'indesign']
+    mobile_dev: ['react_native', 'flutter', 'ios', 'android', 'xamarin']
+    devops: ['docker', 'kubernetes', 'aws', 'azure', 'gcp', 'jenkins', 'git', 'linux', 'bash']
+    business: ['excel', 'powerpoint', 'word', 'project_management', 'agile', 'scrum', 'kanban']
+
+  domain_compatibility:
+    programming: ['web_development', 'data_science', 'mobile_dev', 'devops']
+    web_development: ['programming', 'mobile_dev', 'data_science']
+    data_science: ['programming', 'business']
+    design: ['web_development', 'mobile_dev']
+    mobile_dev: ['programming', 'web_development']
+    devops: ['programming', 'web_development']
+    business: ['data_science', 'project_management']
+
+# Enhanced Skill Scoring
+skill_scoring:
+  exact_match: 3.0              # Points for exact skill match
+  partial_match: 1.0            # Points for partial/fuzzy match
+  domain_match: 2.0             # Points for same domain skills
+  cross_domain: 0.5             # Points for related domain skills
+  max_skills: 8                 # Maximum skills to consider
+  min_skill_threshold: 1.0      # Minimum skill score to consider
+
+# Experience Levels
+experience_levels:
+  beginner: 1                   # 0-1 years
+  intermediate: 2               # 1-3 years
+  advanced: 3                   # 3-5 years
+  expert: 4                     # 5+ years
+
+experience_compatibility:
+  exact: 1.0                    # Same experience level
+  higher: 0.8                   # Candidate more experienced
+  lower: 0.4                    # Candidate less experienced (with training)
+  beginner_boost: 1.2           # Boost for beginner-friendly internships
+
+# Qualification Mapping (Enhanced)
+qualification_levels:
+  12th: 1
+  diploma: 2
+  ug: 3                        # Undergraduate
+  pg: 4                        # Postgraduate
+  phd: 5                       # Doctorate
+
+qualification_compatibility:
+  exact: 1.0                    # Exact match
+  higher: 0.8                   # Candidate has higher qualification
+  lower: 0.3                    # Candidate has lower qualification
+
+# Diversity and Fairness Settings
+diversity:
+  sector_diversity_weight: 0.3   # Weight for sector diversity
+  location_diversity_weight: 0.2 # Weight for location diversity
+  organization_diversity_weight: 0.2 # Weight for organization diversity
+  stipend_range_diversity: 0.3   # Weight for stipend range diversity
+  max_same_sector: 3             # Maximum recommendations from same sector
+  max_same_location: 4           # Maximum recommendations from same location
+  max_same_org: 2                # Maximum recommendations from same organization
+
+# Cold Start Solution
+cold_start:
+  content_based_fallback: true   # Use content-based when collaborative data is sparse
+  skill_gap_analysis: true       # Analyze skill gaps for recommendations
+  profile_bootstrap_threshold: 0.3 # Minimum profile completeness for personalized recs
+  default_recommendations: 5     # Number of default recommendations for new users
+
+# Hybrid Recommendation Settings
+hybrid_scoring:
+  collaborative_weight: 0.4      # Weight for collaborative filtering component
+  content_based_weight: 0.6      # Weight for content-based filtering component
+  switching_threshold: 0.7       # Switch to collaborative when confidence > threshold
+  ensemble_method: 'weighted'    # 'weighted', 'stacking', or 'switching'
+
+# Explainability Settings
+explainability:
+  detailed_reasons: true         # Provide detailed match reasons
+  skill_gap_explanation: true    # Explain skill gaps and learning opportunities
+  qualification_fit_explanation: true # Explain qualification compatibility
+  diversity_explanation: false   # Explain diversity considerations
+  confidence_intervals: true     # Provide confidence scores
+  alternative_suggestions: 3     # Number of alternative suggestions to show
+
+# Location Scoring
+location_scoring:
+  exact_city: 1.0               # Same city
+  same_district: 0.9            # Same district
+  same_state: 0.7               # Same state
+  different_state: 0.2          # Different state (reduced)
+  remote_allowed: 0.4           # Remote work available (reduced)
+  no_match_remote_ok: 0.6       # No location match but remote available
+
+# Stipend Scoring
+stipend_scoring:
+  exact_match: 1.0              # Stipend matches preference
+  within_range: 0.8             # Stipend within preferred range
+  no_preference: 0.5            # No stipend preference specified
+
+# Recency Scoring (days since posting)
+recency_scoring:
+  very_recent: 1.0              # Posted within 7 days
+  recent: 0.8                   # Posted within 30 days
+  moderate: 0.6                 # Posted within 90 days
+  old: 0.3                      # Posted more than 90 days ago
+
+# API Settings
+api:
+  host: '0.0.0.0'
+  port: 8000
+  debug: true
+
+# Output Settings
+recommendation:
+  max_results: 10               # Maximum recommendations to return
+  include_explanations: true    # Include match reasons and explanations
+  min_score_threshold: 0.1      # Minimum score threshold for recommendations

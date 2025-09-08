@@ -1,0 +1,312 @@
+{
+  "skills": [
+    {
+      "name": "academic_writing",
+      "count": 14
+    },
+    {
+      "name": "adobe_illustrator",
+      "count": 13
+    },
+    {
+      "name": "adobe_indesign",
+      "count": 8
+    },
+    {
+      "name": "adobe_photoshop",
+      "count": 10
+    },
+    {
+      "name": "agricultural_economics",
+      "count": 20
+    },
+    {
+      "name": "animation",
+      "count": 8
+    },
+    {
+      "name": "business_analysis",
+      "count": 16
+    },
+    {
+      "name": "canva",
+      "count": 8
+    },
+    {
+      "name": "community_development",
+      "count": 32
+    },
+    {
+      "name": "content_writing",
+      "count": 26
+    },
+    {
+      "name": "curriculum_development",
+      "count": 23
+    },
+    {
+      "name": "data_analysis",
+      "count": 58
+    },
+    {
+      "name": "data_visualization",
+      "count": 12
+    },
+    {
+      "name": "digital_marketing",
+      "count": 11
+    },
+    {
+      "name": "django",
+      "count": 27
+    },
+    {
+      "name": "environmental_science",
+      "count": 12
+    },
+    {
+      "name": "excel",
+      "count": 16
+    },
+    {
+      "name": "figma",
+      "count": 23
+    },
+    {
+      "name": "financial_modeling",
+      "count": 16
+    },
+    {
+      "name": "git",
+      "count": 26
+    },
+    {
+      "name": "graphic_design",
+      "count": 8
+    },
+    {
+      "name": "healthcare_management",
+      "count": 24
+    },
+    {
+      "name": "javascript",
+      "count": 25
+    },
+    {
+      "name": "literature_review",
+      "count": 14
+    },
+    {
+      "name": "machine_learning",
+      "count": 30
+    },
+    {
+      "name": "node.js",
+      "count": 25
+    },
+    {
+      "name": "policy_analysis",
+      "count": 22
+    },
+    {
+      "name": "project_management",
+      "count": 10
+    },
+    {
+      "name": "python",
+      "count": 39
+    },
+    {
+      "name": "react",
+      "count": 22
+    },
+    {
+      "name": "research_methodology",
+      "count": 14
+    },
+    {
+      "name": "social_media",
+      "count": 14
+    },
+    {
+      "name": "sql",
+      "count": 66
+    },
+    {
+      "name": "stakeholder_management",
+      "count": 10
+    },
+    {
+      "name": "statistics",
+      "count": 24
+    },
+    {
+      "name": "strategic_planning",
+      "count": 10
+    },
+    {
+      "name": "teaching",
+      "count": 24
+    },
+    {
+      "name": "ui_ux_design",
+      "count": 24
+    },
+    {
+      "name": "video_editing",
+      "count": 16
+    }
+  ],
+  "locations": [
+    {
+      "name": "Ahmedabad",
+      "count": 15
+    },
+    {
+      "name": "Assam",
+      "count": 18
+    },
+    {
+      "name": "Bangalore",
+      "count": 8
+    },
+    {
+      "name": "Bhubaneswar",
+      "count": 20
+    },
+    {
+      "name": "Chandigarh",
+      "count": 16
+    },
+    {
+      "name": "Chennai",
+      "count": 4
+    },
+    {
+      "name": "Coimbatore",
+      "count": 11
+    },
+    {
+      "name": "Delhi",
+      "count": 19
+    },
+    {
+      "name": "Gujarat",
+      "count": 15
+    },
+    {
+      "name": "Guwahati",
+      "count": 18
+    },
+    {
+      "name": "Hyderabad",
+      "count": 9
+    },
+    {
+      "name": "Jaipur",
+      "count": 13
+    },
+    {
+      "name": "Karnataka",
+      "count": 15
+    },
+    {
+      "name": "Kolkata",
+      "count": 14
+    },
+    {
+      "name": "Lucknow",
+      "count": 17
+    },
+    {
+      "name": "Maharashtra",
+      "count": 29
+    },
+    {
+      "name": "Mumbai",
+      "count": 14
+    },
+    {
+      "name": "Mysore",
+      "count": 7
+    },
+    {
+      "name": "New Delhi",
+      "count": 19
+    },
+    {
+      "name": "Odisha",
+      "count": 20
+    },
+    {
+      "name": "Pune",
+      "count": 15
+    },
+    {
+      "name": "Punjab",
+      "count": 16
+    },
+    {
+      "name": "Rajasthan",
+      "count": 13
+    },
+    {
+      "name": "Tamil Nadu",
+      "count": 15
+    },
+    {
+      "name": "Telangana",
+      "count": 9
+    },
+    {
+      "name": "Uttar Pradesh",
+      "count": 17
+    },
+    {
+      "name": "West Bengal",
+      "count": 14
+    }
+  ],
+  "sectors": [
+    {
+      "name": "agriculture",
+      "count": 20
+    },
+    {
+      "name": "arts",
+      "count": 8
+    },
+    {
+      "name": "education",
+      "count": 30
+    },
+    {
+      "name": "environment",
+      "count": 12
+    },
+    {
+      "name": "finance",
+      "count": 16
+    },
+    {
+      "name": "governance",
+      "count": 10
+    },
+    {
+      "name": "healthcare",
+      "count": 24
+    },
+    {
+      "name": "media",
+      "count": 16
+    },
+    {
+      "name": "research",
+      "count": 14
+    },
+    {
+      "name": "technology",
+      "count": 50
+    }
+  ]
+}
