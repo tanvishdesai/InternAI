@@ -367,11 +367,13 @@ export const SmartProfileBuilder: React.FC<SmartProfileBuilderProps> = ({
                 damping: 30,
                 duration: reducedMotion ? 0.1 : 0.5
               }}
-              className="bg-white rounded-3xl p-8 shadow-lg"
+              className="bg-white rounded-3xl p-8 shadow-lg max-h-[80vh] overflow-hidden flex flex-col"
             >
-              {/* Section Icon */}
-              <motion.div
-                className="w-16 h-16 mx-auto mb-6 gradient-primary rounded-full flex items-center justify-center text-2xl"
+              {/* Scrollable Content */}
+              <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-primary-300 scrollbar-track-gray-100">
+                {/* Section Icon */}
+                <motion.div
+                  className="w-16 h-16 mx-auto mb-6 gradient-primary rounded-full flex items-center justify-center text-2xl"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{
@@ -429,25 +431,27 @@ export const SmartProfileBuilder: React.FC<SmartProfileBuilderProps> = ({
                     </select>
                   ) : currentProfileSection.type === 'multiselect' ? (
                     <div className="space-y-4">
-                      <SkillSelector
-                        items={
-                          currentProfileSection.field === 'skills'
-                            ? (metadata?.skills || [])
-                            : currentProfileSection.field === 'preferredSectors'
-                            ? (metadata?.sectors || [])
-                            : (metadata?.locations || [])
-                        }
-                        selected={Array.isArray(profileData[currentProfileSection.field])
-                          ? profileData[currentProfileSection.field] as string[]
-                          : []}
-                        onChange={(skills: string[]) => {
-                          setProfileData(prev => ({
-                            ...prev,
-                            [currentProfileSection.field]: skills
-                          }));
-                          setInputValue(skills.join(', '));
-                        }}
-                      />
+                      <div className="max-h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-primary-300 scrollbar-track-gray-100">
+                        <SkillSelector
+                          items={
+                            currentProfileSection.field === 'skills'
+                              ? (metadata?.skills || [])
+                              : currentProfileSection.field === 'preferredSectors'
+                              ? (metadata?.sectors || [])
+                              : (metadata?.locations || [])
+                          }
+                          selected={Array.isArray(profileData[currentProfileSection.field])
+                            ? profileData[currentProfileSection.field] as string[]
+                            : []}
+                          onChange={(skills: string[]) => {
+                            setProfileData(prev => ({
+                              ...prev,
+                              [currentProfileSection.field]: skills
+                            }));
+                            setInputValue(skills.join(', '));
+                          }}
+                        />
+                      </div>
                     </div>
                   ) : currentProfileSection.type === 'textarea' ? (
                     <textarea
@@ -538,9 +542,23 @@ export const SmartProfileBuilder: React.FC<SmartProfileBuilderProps> = ({
                 </p>
               </motion.div>
 
-              {/* Navigation Buttons */}
+
+              {/* Swipe Hint */}
               <motion.div
-                className="flex space-x-4"
+                className="text-center mt-6"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.8 }}
+              >
+                <p className="text-xs text-gray-400">
+                  💡 {t('swipeLeftToContinue')}
+                </p>
+              </motion.div>
+              </div>
+
+              {/* Navigation Buttons - Fixed at bottom */}
+              <motion.div
+                className="flex space-x-4 mt-6 flex-shrink-0"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 }}
@@ -567,18 +585,6 @@ export const SmartProfileBuilder: React.FC<SmartProfileBuilderProps> = ({
                 >
                   {currentSection === profileSections.length - 1 ? t('finish') : t('next')}
                 </motion.button>
-              </motion.div>
-
-              {/* Swipe Hint */}
-              <motion.div
-                className="text-center mt-6"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8 }}
-              >
-                <p className="text-xs text-gray-400">
-                  💡 {t('swipeLeftToContinue')}
-                </p>
               </motion.div>
             </motion.div>
           </AnimatePresence>

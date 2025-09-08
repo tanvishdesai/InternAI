@@ -71,7 +71,7 @@ export const RecommendationCards: React.FC<RecommendationCardsProps> = ({
   }
 
   return (
-    <div className="relative w-full max-w-md mx-auto h-[600px] select-none pb-28 md:pb-20">
+    <div className="relative w-full max-w-md mx-auto h-[600px] select-none pb-28 md:pb-20 swipe-container swipe-prevent-scroll">
       {/* Progress Indicator */}
       <div className="mb-4 px-4">
         <div className="flex justify-between text-sm text-gray-600 mb-2">
@@ -98,13 +98,33 @@ export const RecommendationCards: React.FC<RecommendationCardsProps> = ({
         <AnimatePresence initial={false}>
           <motion.div
             key={currentCard.id}
-            className="absolute inset-0 cursor-grab active:cursor-grabbing touch-pan-x"
+            className="absolute inset-0 touch-pan-x select-none mobile-optimized-animation"
             drag="x"
-            dragConstraints={{ left: -200, right: 200 }}
+            dragConstraints={{ left: -300, right: 300 }}
+            dragElastic={0.1}
+            dragMomentum={false}
+            onDragStart={() => {
+              // Prevent default touch behaviors on mobile
+              if (typeof window !== 'undefined' && 'ontouchstart' in window) {
+                document.body.style.overscrollBehavior = 'none';
+              }
+            }}
             onDragEnd={(_, info) => {
-              const threshold = 100;
-              if (info.offset.x > threshold) setLeaving('right');
-              else if (info.offset.x < -threshold) setLeaving('left');
+              // Reset body scroll behavior
+              if (typeof window !== 'undefined' && 'ontouchstart' in window) {
+                document.body.style.overscrollBehavior = '';
+              }
+
+              // Improved mobile threshold detection
+              const threshold = 80; // Lower threshold for mobile
+              const velocityThreshold = 500; // Velocity-based detection for quick swipes
+
+              // Check both distance and velocity for more responsive mobile swiping
+              if (info.offset.x > threshold || (info.offset.x > 40 && info.velocity.x > velocityThreshold)) {
+                setLeaving('right');
+              } else if (info.offset.x < -threshold || (info.offset.x < -40 && info.velocity.x < -velocityThreshold)) {
+                setLeaving('left');
+              }
             }}
             initial={{ scale: 1, opacity: 1, x: 0, rotate: 0 }}
             animate={leaving ? {
@@ -112,7 +132,13 @@ export const RecommendationCards: React.FC<RecommendationCardsProps> = ({
               opacity: 0,
               rotate: reducedMotion ? 0 : leaving === 'right' ? 20 : -20
             } : { x: 0, rotate: 0, opacity: 1 }}
-            transition={{ type: 'spring', stiffness: 260, damping: 26 }}
+            transition={{
+              type: 'spring',
+              stiffness: 260,
+              damping: 26,
+              // Faster response on mobile
+              mass: 0.8
+            }}
             onAnimationComplete={() => {
               if (leaving) {
                 if (leaving === 'right') onLike?.(currentCard);
@@ -135,7 +161,7 @@ export const RecommendationCards: React.FC<RecommendationCardsProps> = ({
       <div className="sticky bottom-6 z-20 flex justify-center space-x-6 mt-6">
         <motion.button
           onClick={() => setLeaving('left')}
-          className="w-14 h-14 bg-red-500 rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl focus-ring"
+          className="w-14 h-14 bg-red-500 rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl focus-ring btn-touch"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >
@@ -148,7 +174,7 @@ export const RecommendationCards: React.FC<RecommendationCardsProps> = ({
 
         <motion.button
           onClick={() => setLeaving('right')}
-          className="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl focus-ring"
+          className="w-14 h-14 bg-green-500 rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl focus-ring btn-touch"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
         >

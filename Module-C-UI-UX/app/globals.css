@@ -82,6 +82,86 @@
 /* Allow horizontal swipes on draggable cards */
 .touch-pan-x {
   touch-action: pan-x;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Mobile gesture optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .touch-pan-x {
+    touch-action: pan-x pinch-zoom;
+    /* Prevent text selection during swipe */
+    -webkit-user-select: none;
+    user-select: none;
+    /* Prevent callouts on long press */
+    -webkit-touch-callout: none;
+    /* Remove tap highlight */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Improve button touch targets on mobile */
+  .btn-touch {
+    min-height: 48px;
+    min-width: 48px;
+    touch-action: manipulation;
+    /* Better touch feedback */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  }
+
+  /* Prevent scroll interference during swiping */
+  .swipe-container {
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Prevent rubber band effect during swipes */
+.swipe-prevent-scroll {
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: contain;
+}
+
+/* Mobile-specific animation optimizations */
+@media (prefers-reduced-motion: no-preference) and (hover: none) {
+  .mobile-optimized-animation {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+}
+
+/* Custom Scrollbar Styles */
+.scrollbar-thin {
+  scrollbar-width: thin;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: #fbbf24;
+  border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: #f59e0b;
+}
+
+.scrollbar-thumb-primary-300 {
+  scrollbar-color: #fbbf24 #f1f5f9;
+}
+
+.scrollbar-track-gray-100 {
+  scrollbar-color: #fbbf24 #f1f5f9;
 }
 
 /* Accessibility */
