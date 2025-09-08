@@ -176,7 +176,18 @@ export default function Home() {
         description: 'Join our development team to work on cutting-edge web applications using modern technologies.',
         matchScore: 92,
         duration: '6 months',
-        applicationDeadline: '2024-02-15'
+        applicationDeadline: '2024-02-15',
+        explanations: [
+          'High skill match with Python and JavaScript experience',
+          'Location preference matches your remote work flexibility',
+          'Education level aligns perfectly with the role requirements'
+        ],
+        contributors: [
+          { name: 'Skill Match', percentage: 45 },
+          { name: 'Location Fit', percentage: 30 },
+          { name: 'Education Level', percentage: 15 },
+          { name: 'Experience Level', percentage: 10 }
+        ]
       },
       {
         id: '2',
@@ -193,7 +204,18 @@ export default function Home() {
         description: 'Work with large datasets and build predictive models for our analytics platform.',
         matchScore: 88,
         duration: '4 months',
-        applicationDeadline: '2024-02-20'
+        applicationDeadline: '2024-02-20',
+        explanations: [
+          'Strong alignment with your data analysis and Python skills',
+          'Flexible hybrid work model suits your preferences',
+          'Competitive stipend matches your expectations'
+        ],
+        contributors: [
+          { name: 'Skill Match', percentage: 40 },
+          { name: 'Work Type', percentage: 25 },
+          { name: 'Stipend Match', percentage: 20 },
+          { name: 'Duration Fit', percentage: 15 }
+        ]
       },
       {
         id: '3',
@@ -210,7 +232,18 @@ export default function Home() {
         description: 'Design user interfaces and create amazing user experiences for our mobile applications.',
         matchScore: 85,
         duration: '3 months',
-        applicationDeadline: '2024-02-10'
+        applicationDeadline: '2024-02-10',
+        explanations: [
+          'Creative field matches your design interests',
+          'Short duration perfect for your availability',
+          'Location is convenient for onsite work'
+        ],
+        contributors: [
+          { name: 'Field Interest', percentage: 35 },
+          { name: 'Duration Match', percentage: 30 },
+          { name: 'Location Convenience', percentage: 25 },
+          { name: 'Skill Relevance', percentage: 10 }
+        ]
       }
     ];
   };
